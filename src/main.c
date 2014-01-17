@@ -2,6 +2,7 @@
 #include <curses.h>
 
 #include "constants.h"
+#include "positioning.h"
 
 int panel_display() {
   // Misc dummy variables
@@ -34,17 +35,17 @@ int panel_display() {
 
     // Arrow key movement
     if ( (keyChar == KEY_UP) && (y > 1) ) y -= 1;
-    if ( (keyChar == KEY_DOWN) && (y < map_height) ) y += 1;
+    if ( (keyChar == KEY_DOWN) && (y < map_height-1) ) y += 1;
     if ( (keyChar == KEY_LEFT) && (x > 1) ) x -= 1;
-    if ( (keyChar == KEY_RIGHT) && (x < map_width) ) x += 1;
+    if ( (keyChar == KEY_RIGHT) && (x < map_width-1) ) x += 1;
     // "Running"
     if ( keyChar == KEY_SR ) { if ((y-5) > 1) y -= 5; else y = 1; }
-    if ( keyChar == KEY_SF ) { if ((y+5) < map_height) y += 5; else y = map_height; }
+    if ( keyChar == KEY_SF ) { if ((y+5) < map_height-1) y += 5; else y = map_height-1; }
     if ( keyChar == KEY_SLEFT ) { if ((x-5) > 1) x -= 5; else x = 1; }
-    if ( keyChar == KEY_SRIGHT) { if ((x+5) < map_width) x += 5; else x = map_width; }
+    if ( keyChar == KEY_SRIGHT) { if ((x+5) < map_width-1) x += 5; else x = map_width-1; }
 
     mvwprintw(map_panel,y,x,"@");
-    prefresh(map_panel,0,0,1,1,map_panel_height,map_panel_width);
+    map_panel_overlay(map_panel, y, x);
   }
 
   return 0;
