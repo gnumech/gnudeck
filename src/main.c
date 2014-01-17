@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <curses.h>
 
-// Server parameters
-int map_height = 80;
-int map_width = 160;
-int map_panel_height = 20;
-int map_panel_width = 40;
+#include "constants.h"
 
-int main() {
+int panel_display() {
   // Misc dummy variables
-  int keyChar;//, nrows, ncols;
+  int keyChar;
+
+  // User locator variables
+  int x = map_panel_width/2, y = map_panel_height/2;
 
   // Initialize curses screen
   WINDOW *background = initscr();
@@ -17,6 +16,7 @@ int main() {
   keypad(stdscr, TRUE);
 
   // May or may not be necessary
+  //int nrows, ncols;
   //getmaxyx(background,nrows,ncols);
 
   // Create map panel
@@ -26,10 +26,6 @@ int main() {
 
   // Dimension fix (is this a universal problem?)
   map_panel_height -= 2; map_panel_width -= 2;
-
-  // Insert users and objects
-  int x = map_panel_width/2, y = map_panel_height/2;
-  mvwprintw(map_panel,y,x,"@");
 
   // Main loop
   while ( keyChar != 'q') {
@@ -48,12 +44,14 @@ int main() {
     if ( keyChar == KEY_SRIGHT) { if ((x+5) < map_width) x += 5; else x = map_width; }
 
     mvwprintw(map_panel,y,x,"@");
-
-    // Center map panel on user
-    // function to go here
     prefresh(map_panel,0,0,1,1,map_panel_height,map_panel_width);
   }
 
+  return 0;
+}
+
+int main() {
+  panel_display();
   endwin();
   return 0;
 }
