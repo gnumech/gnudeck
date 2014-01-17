@@ -30,7 +30,7 @@ FEATURES
 --------
 
 Creates exclusive permission-extensive directories for personal user server usage.  
-Displays grid-icon view of directory.
+Displays grid-icon map view of directory with movable character.
 
 
 CONTRIBUTING
