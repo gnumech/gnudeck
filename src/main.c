@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <curses.h>
 
 #include "constants.h"
@@ -8,6 +9,7 @@
 int panel_display() {
   // Misc dummy variables
   int keyChar;
+  char *USER = getenv("USER");
 
   // Initialize curses screen
   WINDOW *background = initscr();
@@ -24,12 +26,12 @@ int panel_display() {
   wborder(map_panel_container,0,0,0,0,0,0,0,0);
   WINDOW *map_panel = newpad(map_height,map_width);
 
-  // // Create terminal panel with border 1 char around it
-  // int term_panel_container_height = term_panel_height + 2;
-  // int term_panel_container_width = term_panel_width + 2;
-  // WINDOW *term_panel_container = derwin(background,term_panel_container_height,term_panel_container_width,map_panel_container_height+1,0);
-  // wborder(term_panel_container,0,0,0,0,0,0,0,0);
-  // WINDOW *term_panel = derwin(term_panel_container,term_panel_height,term_panel_width,1,1);
+  // Create terminal panel with border 1 char around it
+  int term_panel_container_height = term_panel_height + 2;
+  int term_panel_container_width = term_panel_width + 2;
+  WINDOW *term_panel_container = derwin(background,term_panel_container_height,term_panel_container_width,map_panel_container_height+1,0);
+  wborder(term_panel_container,0,0,0,0,0,0,0,0);
+  //WINDOW *term_panel = derwin(term_panel_container,term_panel_height,term_panel_width,1,1);
 
   // User locator variables
   int x = map_panel_width/2, y = map_panel_height/2;
@@ -37,6 +39,7 @@ int panel_display() {
   // Main loop
   while ( keyChar != 'q') {
     keyChar = wgetch(stdscr);
+    // Remove original character position
     mvwprintw(map_panel,y,x," ");
 
     // Arrow key movement
@@ -55,14 +58,19 @@ int panel_display() {
         // term_print(working_directory, tile_confirmation_string);
         nodelay(stdscr, FALSE);
         keyChar = getch();
-        if ( (keyChar == KEY_UP) && (y > 0) ) mvwprintw(map_panel,y-1,x,".");
-        if ( (keyChar == KEY_DOWN) && (y < map_height-1) ) mvwprintw(map_panel,y+1,x,".");
-        if ( (keyChar == KEY_LEFT) && (x > 0) ) mvwprintw(map_panel,y,x-1,".");
-        if ( (keyChar == KEY_RIGHT) && (x < map_width-1) ) mvwprintw(map_panel,y,x+1,".");
+        if ( (keyChar == KEY_UP) && (y > 0) ) mvwprintw(map_panel,y-1,x,symb_tile);
+        if ( (keyChar == KEY_DOWN) && (y < map_height-1) ) mvwprintw(map_panel,y+1,x,symb_tile);
+        if ( (keyChar == KEY_LEFT) && (x > 0) ) mvwprintw(map_panel,y,x-1,symb_tile);
+        if ( (keyChar == KEY_RIGHT) && (x < map_width-1) ) mvwprintw(map_panel,y,x+1,symb_tile);
         nodelay(stdscr, TRUE);
     }
 
-    mvwprintw(map_panel,y,x,"@");
+    // Update coordinate display
+    wmove(background, map_panel_container_height, 1);// wdeleteln(background);
+    wprintw(background,"%s is at (%d,%d)",USER,map_height-y,x);
+
+    // Replace character position
+    mvwprintw(map_panel,y,x,symb_user);
     map_panel_overlay(map_panel, y, x);
   }
 
