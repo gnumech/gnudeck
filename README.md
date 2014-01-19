@@ -23,7 +23,9 @@ INSTALLATION:
 USAGE
 -----
 
-Coming soon!
+Arrow keys - Move character up, down, left and right  
+  
+. - Place tile
 
 
 FEATURES

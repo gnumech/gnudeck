@@ -7,4 +7,7 @@ int map_width = 160;
 int map_panel_height = 20;
 int map_panel_width = 40;
 
+int term_panel_height = 20;
+int term_panel_width = 80;
+
 #endif /* CONSTANTS_H */
