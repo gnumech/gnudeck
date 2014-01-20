@@ -16,9 +16,6 @@ int panel_display() {
   cbreak(); noecho(); curs_set(0); nodelay(stdscr, TRUE);
   keypad(stdscr, TRUE);
 
-  //int nrows, ncols;
-  //getmaxyx(background,nrows,ncols);
-
   // Create map panel with border 1 char around it
   int map_panel_container_height = map_panel_height + 2;
   int map_panel_container_width = map_panel_width + 2;

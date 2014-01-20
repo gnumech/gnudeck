@@ -16,8 +16,13 @@ DESCRIPTION
 INSTALLATION:
 -------------
 
+Modify the contents of *src/install.c* as needed for desired screen resolution parameters, then  
+  
+`make configure`  
 `make`  
-`make install`
+`make install`  
+  
+Repeat as necessary if screen resolution is not satisfactory.
 
 
 USAGE
