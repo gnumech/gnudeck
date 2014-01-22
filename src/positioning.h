@@ -11,10 +11,10 @@ int map_panel_overlay(WINDOW *map_panel, int y, int x) {
   // Center about x
   if ( x < map_panel_width/2 )
     map_panel_leftmost = 0;
-  if ( ( x >= map_panel_width/2 ) && ( x <= map_width - map_panel_width/2 ) )
-    map_panel_leftmost = x - (int)(map_panel_width/2);
-  if ( x > map_width - map_panel_width/2 )
-    map_panel_leftmost = map_width - map_panel_width;
+  if ( ( x >= map_panel_width/2 ) && ( x < map_width - map_panel_width/2 ) )
+    map_panel_leftmost = x - map_panel_width/2;
+  if ( x >= map_width - map_panel_width/2 )
+    map_panel_leftmost = map_width - map_panel_width+1;
 
   // Center about y
   if ( y < map_panel_height/2 )

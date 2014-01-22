@@ -10,10 +10,12 @@ int main() {
 
   int map_height = 80;
   int map_width = 160;
-  int map_panel_height = lines/2;
-  int map_panel_width = columns/3;
-  int term_panel_height = (lines/2)-4;
+  int map_panel_height = 3*lines/5;
+  int map_panel_width = (columns/2);
+  int term_panel_height = (2*lines/5)-3;
   int term_panel_width = columns-2;
+  int info_panel_height = 3*lines/5;
+  int info_panel_width = columns/2 - 3;
   char *symb_user = "@";
   char *symb_tile = ".";
 
@@ -24,8 +26,16 @@ int main() {
   fprintf(constants_file,"int map_width = %d;\n", map_width);
   fprintf(constants_file,"int map_panel_height = %d;\n", map_panel_height);
   fprintf(constants_file,"int map_panel_width = %d;\n", map_panel_width);
+  fprintf(constants_file,"int map_panel_container_height = %d;\n", map_panel_height+2);
+  fprintf(constants_file,"int map_panel_container_width = %d;\n", map_panel_width+2);
   fprintf(constants_file,"int term_panel_height = %d;\n", term_panel_height);
-  fprintf(constants_file,"int term_panel_width = %d;\n\n", term_panel_width);
+  fprintf(constants_file,"int term_panel_width = %d;\n", term_panel_width);
+  fprintf(constants_file,"int term_panel_container_height = %d;\n", term_panel_height+2);
+  fprintf(constants_file,"int term_panel_container_width = %d;\n", term_panel_width+2);
+  fprintf(constants_file,"int info_panel_height = %d;\n", info_panel_height);
+  fprintf(constants_file,"int info_panel_width = %d;\n", info_panel_width);
+  fprintf(constants_file,"int info_panel_container_height = %d;\n", info_panel_height+2);
+  fprintf(constants_file,"int info_panel_container_width = %d;\n\n", info_panel_width+2);
   fprintf(constants_file,"/* Object symbols */\n");
   fprintf(constants_file,"char *symb_user = \"%s\";\n",symb_user);
   fprintf(constants_file,"char *symb_tile = \"%s\";\n\n",symb_tile);
