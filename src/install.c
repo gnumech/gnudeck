@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+      /////////////////////////////////
+        // Gather constant information //
+          // CHANGE HERE AS DESIRED      //
+            /////////////////////////////////
+
 int main() {
-  // Gather constant information
-  // CHANGE HERE AS DESIRED
   char *USER = getenv("USER");
   int lines = atoi(getenv("LINES"));
   int columns = atoi(getenv("COLUMNS"));
 
-  int map_height = 80;
-  int map_width = 160;
+  int map_height = 100;
+  int map_width = 100;
   int map_panel_height = 3*lines/5;
   int map_panel_width = (columns/2);
   int term_panel_height = (2*lines/5)-3;

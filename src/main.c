@@ -4,12 +4,12 @@
 
 #include "constants.h"
 #include "positioning.h"
+#include "info_update.h"
 #include "term_update.h"
 
 int panel_display() {
   // Misc dummy variables
   int keyChar;
-  char *USER = getenv("USER");
 
   // Initialize curses screen
   WINDOW *background = initscr();
@@ -24,7 +24,7 @@ int panel_display() {
   // Create terminal panel with border 1 char around it
   WINDOW *term_panel_container = derwin(background,term_panel_container_height,term_panel_container_width,map_panel_container_height,0);
   wborder(term_panel_container,0,0,0,0,0,0,0,0);
-  WINDOW *term_panel = derwin(term_panel_container,term_panel_height,term_panel_width,1,1);
+  //WINDOW *term_panel = derwin(term_panel_container,term_panel_height,term_panel_width,1,1);
 
   // Create info panel
   WINDOW *info_panel_container = derwin(background,info_panel_container_height,info_panel_container_width,0,map_panel_container_width);
@@ -32,7 +32,7 @@ int panel_display() {
   WINDOW *info_panel = derwin(info_panel_container,info_panel_height,info_panel_width,1,1);
 
   // User locator variables
-  int x = map_panel_width/2, y = map_panel_height/2;
+  int x = map_width/2, y = map_height/2;
 
   // Main loop
   while ( keyChar != 'q') {
@@ -63,11 +63,8 @@ int panel_display() {
         nodelay(stdscr, TRUE);
     }
 
-    // Update coordinate display (soon to be its own function)
-    werase(info_panel);
-    mvwprintw(info_panel,0,0,"==USERS==");
-    mvwprintw(info_panel,1,0,"%s: (%d,%d)",USER,map_height-y,x+1);
-    wrefresh(info_panel);
+    // Update info display
+    info_panel_display(info_panel, y, x);
 
     // Replace character position
     mvwprintw(map_panel,y,x,symb_user);

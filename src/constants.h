@@ -4,8 +4,8 @@
 /* Server parameters */
 
 // Panel dimensions
-int map_height = 80;
-int map_width = 160;
+int map_height = 100;
+int map_width = 100;
 int map_panel_height = 24;
 int map_panel_width = 72;
 int map_panel_container_height = 26;

@@ -21,4 +21,4 @@ install: $(EXECNAME)
 	install -m $(PERMISSION) $(EXECNAME2) $(BINDIR)
 
 clean:
-	rm -r $(EXECNAME1) $(EXECNAME2) $(SRCFILE3) home disp
+	rm -r $(EXECNAME1) $(EXECNAME2) home disp
