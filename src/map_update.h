@@ -1,10 +1,10 @@
-#ifndef POSITIONING_H
-#define POSITIONING_H
+#ifndef MAP_UPDATE_H
+#define MAP_UPDATE_H
 
 #include <curses.h>
 #include "constants.h"
 
-int map_panel_overlay(WINDOW *map_panel, int y, int x) {
+int map_panel_display(WINDOW *map_panel, int y, int x) {
   // Declare position variables
   int map_panel_leftmost, map_panel_topmost;
 
@@ -30,4 +30,4 @@ int map_panel_overlay(WINDOW *map_panel, int y, int x) {
   return 0;
 }
 
-#endif /* POSITIONING_H */
+#endif /* MAP_UPDATE_H */

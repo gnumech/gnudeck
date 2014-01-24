@@ -12,7 +12,7 @@ int info_panel_display(WINDOW *info_panel, int y, int x) {
   // Update coordinate display (soon to be its own function)
   werase(info_panel);
   mvwprintw(info_panel,0,0,"==USERS==");
-  mvwprintw(info_panel,1,0,"%s: (%d,%d)",USER,map_height-y,x+1);
+  mvwprintw(info_panel,1,0,"%s: (%d,%d)",USER,y,x);
   wrefresh(info_panel);
 
   return 0;
