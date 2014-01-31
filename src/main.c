@@ -10,16 +10,18 @@
 // Main loop
 int loop(WINDOW *map_panel, WINDOW *info_panel, int y, int x) {
   int keyChar;
+  // char *working_directory = "/home/";	SOON, VERY SOON.
+
   while ( keyChar != 'q') {
     keyChar = wgetch(stdscr);
     // Remove original character position
     mvwprintw(map_panel,y,x," ");
 
     // Arrow key movement
-    if ( (keyChar == KEY_UP) && (y > 0) ) y -= 1;
-    if ( (keyChar == KEY_DOWN) && (y < map_height-1) ) y += 1;
-    if ( (keyChar == KEY_LEFT) && (x > 0) ) x -= 1;
-    if ( (keyChar == KEY_RIGHT) && (x < map_width-1) ) x += 1;
+    if ( (keyChar == KEY_UP) && (y > 0) && (mvwinch(map_panel,y-1,x) == '.') ) y -= 1;
+    if ( (keyChar == KEY_DOWN) && (y < map_height-1) && (mvwinch(map_panel,y+1,x) == '.') ) y += 1;
+    if ( (keyChar == KEY_LEFT) && (x > 0) && (mvwinch(map_panel,y,x-1) == '.') ) x -= 1;
+    if ( (keyChar == KEY_RIGHT) && (x < map_width-1) && (mvwinch(map_panel,y,x+1) == '.') ) x += 1;
     // "Running"
     if ( keyChar == KEY_SR ) { if ((y-5) > 0) y -= 5; else y = 0; }
     if ( keyChar == KEY_SF ) { if ((y+5) < map_height-1) y += 5; else y = map_height-1; }
@@ -44,7 +46,6 @@ int loop(WINDOW *map_panel, WINDOW *info_panel, int y, int x) {
     // Replace character position
     mvwprintw(map_panel,y,x,symb_user);
     map_panel_display(map_panel, y, x);
-
   }
 
   return 0;
@@ -71,7 +72,7 @@ int panel_display() {
   wborder(info_panel_container,0,0,0,0,0,0,0,0);
   WINDOW *info_panel = derwin(info_panel_container,info_panel_height,info_panel_width,1,1);
 
-  // User locator variables
+  // User Location variables
   int x = map_width/2, y = map_height/2;
 
   // Initialize loop
@@ -81,8 +82,6 @@ int panel_display() {
 }
 
 int main() {
-  //char *working_directory
-  //sprintf(working_directory, "home/%s", USER);
   panel_display();
   endwin();
   return 0;

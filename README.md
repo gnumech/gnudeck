@@ -28,7 +28,9 @@ Repeat as necessary if screen resolution is not satisfactory.
 USAGE
 -----
 
-Arrow keys - Move character up, down, left and right  
+↑,↓,←,→ - Move character up, down, left and right on placed tiles  
+  
+shift + ↑,↓,←,→ - Sprint character up, dowm, left and right across 5 tiles
   
 . - Place tile
 
@@ -37,7 +39,8 @@ FEATURES
 --------
 
 Creates exclusive permission-extensive directories for personal user server usage.  
-Displays grid-icon map view of directory with movable character.
+Displays grid-icon map view of directory with movable character.  
+Customizable "floors"/"walkways" in user's directories
 
 
 CONTRIBUTING

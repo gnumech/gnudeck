@@ -5,6 +5,7 @@ Changelog
 Alpha (unreleased)
 ------------------
 
+- Working directory foreshaddowing, tile mechanism (some)
 - Added info panel, coordinate fixing  
 - Added install script, constants setting  
 - User coordinates (finicky), terminal panel  
